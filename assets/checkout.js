@@ -1,6 +1,6 @@
 const createPreferent = (data) => {
   var url_img = data.img.replace(".", "");
-  debugger
+  debugger;
   var preference = {
     items: [
       {
@@ -28,9 +28,9 @@ const createPreferent = (data) => {
       },
     },
     back_urls: {
-      success: `${window.location.origin}/feedback`,
-      failure: `${window.location.origin}/feedback`,
-      pending: `${window.location.origin}/feedback`,
+      success: `${window.location.origin}/success`,
+      failure: `${window.location.origin}/failure`,
+      pending: `${window.location.origin}/pending`,
     },
     auto_return: "approved",
     payment_methods: {
@@ -48,6 +48,7 @@ const createPreferent = (data) => {
     },
     notification_url: `${window.location.origin}/ipn`,
     external_reference: "arturorafael30@gmail.com",
+    expires: false,
   };
 
   fetch("https://api.mercadopago.com/checkout/preferences", {

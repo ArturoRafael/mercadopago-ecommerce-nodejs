@@ -26,23 +26,20 @@ app.get("/detail", function (req, res) {
   res.render("detail", req.query);
 });
 
-app.get("/feedback", function (request, response) {
-  response.json({
-    Payment: request.query.payment_id,
-    Status: request.query.status,
-    MerchantOrder: request.query.merchant_order_id,
-  });
-  console.log(response);
-  res.render("feedback", request.query);
+app.get("/failure", function (request, res) {
+  res.render("failure", request.query);
 });
 
-app.get("/ipn", function (request, response) {
-  response.json({
-    Payment: request.query.payment_id,
-    Status: request.query.status,
-    MerchantOrder: request.query.merchant_order_id,
-  });
-  console.log("ipn", response);
+app.get("/pending", function (request, res) {
+  res.render("pending", request.query);
+});
+
+app.get("/success", function (request, res) {
+  res.render("success", request.query);
+});
+
+app.get("/ipn", function (request, res) {
+  res.status(200).send(res.body ? res.body : "");
 });
 
 app.listen(port);
