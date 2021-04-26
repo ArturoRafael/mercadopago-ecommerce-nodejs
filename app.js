@@ -39,6 +39,7 @@ app.get("/success", function (request, res) {
 });
 
 app.get("/ipn", function (request, res) {
+  console.log(res.body ? res.body : "");
   res.status(200).send(res.body ? res.body : "");
 });
 
