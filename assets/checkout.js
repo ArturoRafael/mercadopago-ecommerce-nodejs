@@ -45,7 +45,7 @@ const createPreferent = (data) => {
       ],
       installments: 6,
     },
-    notification_url: `${window.location.origin}/notifications`,
+    notification_url: `${window.location.origin}/notifications?source_news=webhooks`,
     external_reference: "arturorafael30@gmail.com",
     expires: false,
   };
