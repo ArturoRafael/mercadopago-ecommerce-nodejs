@@ -11,11 +11,13 @@ mercadopago.configure({
 var port = process.env.PORT || 3000;
 
 var app = express();
+var jsonParser = bodyParser.json()
+
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
 app.use(express.static("assets"));
-app.use(bodyParser.json({limit: "50mb"}));
+
 app.use("/assets", express.static(__dirname + "/assets"));
 
 app.use(function (req, res, next) {
@@ -50,7 +52,7 @@ app.get("/success", function (request, res) {
   res.render("success", request.query);
 });
 
-app.post("/notifications", function (request, res) {
+app.post("/notifications", jsonParser, function (request, res) {
   console.log(request.body);
   res.status(200).send("Ok");
 });
