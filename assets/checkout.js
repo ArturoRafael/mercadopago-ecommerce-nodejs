@@ -1,6 +1,5 @@
 const createPreferent = (data) => {
   var url_img = data.img.replace(".", "");
-  debugger;
   var preference = {
     items: [
       {
@@ -46,7 +45,7 @@ const createPreferent = (data) => {
       ],
       installments: 6,
     },
-    notification_url: `${window.location.origin}/ipn`,
+    notification_url: `${window.location.origin}/notifications`,
     external_reference: "arturorafael30@gmail.com",
     expires: false,
   };
@@ -64,12 +63,10 @@ const createPreferent = (data) => {
       return response.json();
     })
     .then(function (preference) {
-      console.log(preference);
       if (preference.error) {
         alert(JSON.stringify(preference));
         return false;
       }
-      let collector_id = preference.collector_id;
       let init_point = preference.init_point;
       window.location.href = init_point;
     })
@@ -83,4 +80,3 @@ $(document).on("submit", "#form-submit", function (e) {
   let data = $("#data").data();
   createPreferent(data);
 });
-//mercadopago-button;

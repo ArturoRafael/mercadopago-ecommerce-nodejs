@@ -10,13 +10,24 @@ mercadopago.configure({
 var port = process.env.PORT || 3000;
 
 var app = express();
-app.use(express.urlencoded({ extended: false }));
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
 app.use(express.static("assets"));
 
 app.use("/assets", express.static(__dirname + "/assets"));
+
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header(
+  	'Access-Control-Allow-Headers', 
+  	'Authorization, Origin, X-Requested-With, Content-Type, Accept');
+  if(req.method == 'OPTIONS'){
+  	res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  	return res.status(200).json({});
+  }
+  next();  
+});
 
 app.get("/", function (req, res) {
   res.render("home");
@@ -38,9 +49,11 @@ app.get("/success", function (request, res) {
   res.render("success", request.query);
 });
 
-app.get("/ipn", function (request, res) {
-  console.log(res.body ? res.body : "");
-  res.status(200).send(res.body ? res.body : "");
+app.post("/notifications", function (request, res) {
+  console.log(request);
+  res.status(200).send("Ok");
 });
 
-app.listen(port);
+app.listen(port, () => {
+  console.log("Server is running");
+});
