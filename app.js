@@ -1,5 +1,6 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
+var bodyParser = require('body-parser');
 const mercadopago = require("mercadopago");
 mercadopago.configure({
   integrator_id: "dev_24c65fb163bf11ea96500242ac130004",
@@ -14,7 +15,7 @@ app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
 app.use(express.static("assets"));
-
+app.use(bodyParser.json({limit: "50mb"}));
 app.use("/assets", express.static(__dirname + "/assets"));
 
 app.use(function (req, res, next) {
