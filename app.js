@@ -50,7 +50,7 @@ app.get("/success", function (request, res) {
 });
 
 app.post("/notifications", function (request, res) {
-  console.log(request);
+  console.log(request.body);
   res.status(200).send("Ok");
 });
 
